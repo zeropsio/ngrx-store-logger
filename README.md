@@ -43,18 +43,18 @@ Initializes logger middleware with appropriate options (logical defaults if no o
 
 ``` ts
 interface LoggerOptions {
-    level? : 'log' | 'console' | 'warn' | 'error' | 'info', //default log
-    collapsed? : boolean, //Should log group be collapsed? default: false
-    duration? : boolean, //Print duration with action? default: false
-    timestamp? : boolean, //Print timestamp with action? default: true
-    stateTransformer? : (state : Object) => Object, //Transform state before print default: state => state
-    actionTransformer? : (actn : Object) => Object, //Transform action before print default: actn => actn
+    level? : 'log' | 'console' | 'warn' | 'error' | 'info'; //default log
+    collapsed? : boolean; //Should log group be collapsed? default: false
+    duration? : boolean; //Print duration with action? default: false
+    timestamp? : boolean; //Print timestamp with action? default: true
+    stateTransformer? : (state : Object) => Object; //Transform state before print default: state => state
+    actionTransformer? : (actn : Object) => Object; //Transform action before print default: actn => actn
     colors? : {
-        title: (action : Object) => string,
-        prevState: (prevState : Object) => string,
-        action: (action: Object) => string,
-        nextState: (nextState : Object) => string,
-        error: (error: any, prevState: Object) => string
+        title: (action : Object) => string;
+        prevState: (prevState : Object) => string;
+        action: (action: Object) => string;
+        nextState: (nextState : Object) => string;
+        error: (error: any, prevState: Object) => string;
     }
 }
 ```
