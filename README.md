@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', main);
 Initializes logger middleware with appropriate options (logical defaults if no options supplied)
 
 #### Arguments
-* `options` \(*Object{}*): Loggers options available
+* `options` \(*Object*): Loggers options available
 
 ##### Options
 
