@@ -8,20 +8,23 @@ import {
 } from '@ngrx/store';
 
 export interface LoggerOptions {
-    level? : string,
-    collapsed? : boolean,
-    duration? : boolean,
-    timestamp? : boolean,
-    stateTransformer? : (state : {}) => {},
-    actionTransformer? : (actn : {}) => {},
-    errorTransformer? : (error : {}) => {},
+    level? : 'log' | 'console' | 'warn' | 'error' | 'info',
+    collapsed? : boolean, //Should log group be collapsed?
+    duration? : boolean, //Print duration with action?
+    timestamp? : boolean, //Print timestamp with action?
+    stateTransformer? : (state : Object) => Object, //Transform state before print
+    actionTransformer? : (actn : Object) => Object, //Transform action before print
     colors? : {
-        title: (any) => string,
-        prevState: (any) => string,
-        action: (any) => string,
-        nextState: (any) => string,
-        error: (any) => string
+        title: (action : Object) => string,
+        prevState: (prevState : Object) => string,
+        action: (action: Object) => string,
+        nextState: (nextState : Object) => string,
+        error: (error: any, prevState: Object) => string
     }
+}
+
+export interface ColorOptions {
+    (Object) : string
 }
 
 const logger = console;
@@ -145,7 +148,6 @@ export const loggerMiddleware = (opts : LoggerOptions = {}) => {
         timestamp : true,
         stateTransformer : state => state,
         actionTransformer : actn => actn,
-        errorTransformer : error => error,
         colors : {
             title: () => `#000000`,
             prevState: () => `#9E9E9E`,
@@ -159,7 +161,7 @@ export const loggerMiddleware = (opts : LoggerOptions = {}) => {
     return [
         provide(LOGGER, {
             useFactory(initialState){
-                return new BehaviorSubject(INITIAL_STATE);
+                return new BehaviorSubject(initialState);
             },
             deps: [INITIAL_STATE]
         }),
