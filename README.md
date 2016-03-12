@@ -1,6 +1,8 @@
 # ngrx-store-logger
 Advanced logging for @ngrx/store applications, ported from [redux-logger](https://github.com/fcomb/redux-logger).
 
+![ngrx-store-logger](http://imgur.com/Fm2qfb5)
+
 ## Dependencies
 `ngrx-store-logger` depends on [@ngrx/store](https://github.com/ngrx/store) and [Angular 2](https://github.com/angular/angular).
 

@@ -2,7 +2,6 @@ import {OpaqueToken, provide, Provider} from "angular2/core";
 import {BehaviorSubject} from "rxjs/Rx";
 import {
     createMiddleware,
-    INITIAL_STATE,
     usePreMiddleware,
     usePostMiddleware
 } from '@ngrx/store';
@@ -160,10 +159,9 @@ export const loggerMiddleware = (opts : LoggerOptions = {}) => {
 
     return [
         provide(LOGGER, {
-            useFactory(initialState){
-                return new BehaviorSubject(initialState);
-            },
-            deps: [INITIAL_STATE]
+            useFactory(){
+                return new BehaviorSubject(null);
+            }
         }),
         provide(LOGGER_OPTIONS, {
             useValue: options
