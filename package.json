@@ -4,7 +4,9 @@
   "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
-
+    "build_dist": "rm -rf dist && tsc",
+    "prepublish": "npm run typings && npm run build_dist",
+    "typings": "typings install"
   },
   "repository": {
     "type": "git",
