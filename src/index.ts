@@ -26,6 +26,8 @@ export interface ColorOptions {
     (Object) : string
 }
 
+declare var console;
+
 const logger = console;
 const LOGGER = new OpaqueToken('@ngrx/logger');
 const LOGGER_OPTIONS = new OpaqueToken('@ngrx/logger/options');
