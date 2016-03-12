@@ -1,7 +1,7 @@
 {
   "name": "ngrx-store-logger",
   "version": "0.0.1",
-  "description": "Advanced logging for @ngrx/store",
+  "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
     "build_dist": "rm -rf dist && tsc",
@@ -17,6 +17,7 @@
     "ngrx",
     "store",
     "logger",
+    "middleware",
     "rxjs"
   ],
   "author": "Brian Troncone",
