@@ -7,18 +7,18 @@ import {
 } from '@ngrx/store';
 
 export interface LoggerOptions {
-    level? : 'log' | 'console' | 'warn' | 'error' | 'info',
-    collapsed? : boolean, //Should log group be collapsed?
-    duration? : boolean, //Print duration with action?
-    timestamp? : boolean, //Print timestamp with action?
-    stateTransformer? : Transformer, //Transform state before print
-    actionTransformer? : Transformer, //Transform action before print
+    level? : 'log' | 'console' | 'warn' | 'error' | 'info';
+    collapsed? : boolean; //Should log group be collapsed?
+    duration? : boolean; //Print duration with action?
+    timestamp? : boolean; //Print timestamp with action?
+    stateTransformer? : Transformer; //Transform state before print
+    actionTransformer? : Transformer; //Transform action before print
     colors? : {
-        title: ColorOptions,
-        prevState: ColorOptions,
-        action: ColorOptions,
-        nextState: ColorOptions,
-        error: ColorOptions
+        title: ColorOptions;
+        prevState: ColorOptions;
+        action: ColorOptions;
+        nextState: ColorOptions;
+        error: ColorOptions;
     }
 }
 
