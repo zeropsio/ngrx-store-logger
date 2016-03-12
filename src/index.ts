@@ -11,19 +11,23 @@ export interface LoggerOptions {
     collapsed? : boolean, //Should log group be collapsed?
     duration? : boolean, //Print duration with action?
     timestamp? : boolean, //Print timestamp with action?
-    stateTransformer? : (state : Object) => Object, //Transform state before print
-    actionTransformer? : (actn : Object) => Object, //Transform action before print
+    stateTransformer? : Transformer, //Transform state before print
+    actionTransformer? : Transformer, //Transform action before print
     colors? : {
-        title: (action : Object) => string,
-        prevState: (prevState : Object) => string,
-        action: (action: Object) => string,
-        nextState: (nextState : Object) => string,
-        error: (error: any, prevState: Object) => string
+        title: ColorOptions,
+        prevState: ColorOptions,
+        action: ColorOptions,
+        nextState: ColorOptions,
+        error: ColorOptions
     }
 }
 
 export interface ColorOptions {
     (Object) : string
+}
+
+export interface Transformer {
+    (Object) : Object
 }
 
 declare var console;
