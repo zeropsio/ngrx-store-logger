@@ -7,6 +7,23 @@ import {
     usePostMiddleware
 } from '@ngrx/store';
 
+export interface LoggerOptions {
+    level? : string,
+    collapsed? : boolean,
+    duration? : boolean,
+    timestamp? : boolean,
+    stateTransformer? : (state : {}) => {},
+    actionTransformer? : (actn : {}) => {},
+    errorTransformer? : (error : {}) => {},
+    colors? : {
+        title: (any) => string,
+        prevState: (any) => string,
+        action: (any) => string,
+        nextState: (any) => string,
+        error: (any) => string
+    }
+}
+
 const logger = console;
 const LOGGER = new OpaqueToken('@ngrx/logger');
 const LOGGER_OPTIONS = new OpaqueToken('@ngrx/logger/options');
@@ -120,12 +137,10 @@ const postLogger = createMiddleware((log, loggerBuffer, options) => {
         });
 }, [ LOGGER, LOGGER_BUFFER, LOGGER_OPTIONS ]);
 
-export const loggerMiddleware = (opts = {}) => {
+export const loggerMiddleware = (opts : LoggerOptions = {}) => {
     const defaults = {
         level : `log`,
-        logger : console,
         collapsed : false,
-        predicate : null,
         duration : false,
         timestamp : true,
         stateTransformer : state => state,
@@ -139,12 +154,12 @@ export const loggerMiddleware = (opts = {}) => {
             error: () => `#F20404`,
         }
     };
-    const options = Object.assign({}, defaults, opts);
+    const options : LoggerOptions = Object.assign({}, defaults, opts);
 
     return [
         provide(LOGGER, {
             useFactory(initialState){
-                return new BehaviorSubject({});
+                return new BehaviorSubject(INITIAL_STATE);
             },
             deps: [INITIAL_STATE]
         }),

@@ -10,7 +10,7 @@ npm install ngrx-store-logger --save
 ```
 
 1. Configure your ngrx store as normal using `provideStore`. 
-2. Using the provided `loggerMiddleware` function, specify option overrides if applicable.
+2. Using the provided `loggerMiddleware` function, specify option overrides.
 
 ```ts
 import {bootstrap} from 'angular2/platform/browser';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', main);
 
 ## API
 ### `loggerMiddleware(options? = {})`
-Override appropriate options (more soon)
+Initializes logger middleware with appropriate options (logical defaults if no options supplied)
 
 #### Arguments
-* `options` \(*Object{}*): Loggers options to override
+* `options` \(*Object{}*): Loggers options available
