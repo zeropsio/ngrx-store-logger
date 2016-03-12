@@ -6,30 +6,6 @@ import {
     usePostMiddleware
 } from '@ngrx/store';
 
-export interface LoggerOptions {
-    level? : 'log' | 'console' | 'warn' | 'error' | 'info';
-    collapsed? : boolean; //Should log group be collapsed?
-    duration? : boolean; //Print duration with action?
-    timestamp? : boolean; //Print timestamp with action?
-    stateTransformer? : Transformer; //Transform state before print
-    actionTransformer? : Transformer; //Transform action before print
-    colors? : {
-        title: ColorOptions;
-        prevState: ColorOptions;
-        action: ColorOptions;
-        nextState: ColorOptions;
-        error: ColorOptions;
-    }
-}
-
-export interface ColorOptions {
-    (Object) : string
-}
-
-export interface Transformer {
-    (Object) : Object
-}
-
 declare var console;
 
 const logger = console;
@@ -145,7 +121,7 @@ const postLogger = createMiddleware((log, loggerBuffer, options) => {
         });
 }, [ LOGGER, LOGGER_BUFFER, LOGGER_OPTIONS ]);
 
-export const loggerMiddleware = (opts : LoggerOptions = {}) => {
+export const loggerMiddleware = (opts : Object = {}) => {
     const defaults = {
         level : `log`,
         collapsed : false,
@@ -161,7 +137,7 @@ export const loggerMiddleware = (opts : LoggerOptions = {}) => {
             error: () => `#F20404`,
         }
     };
-    const options : LoggerOptions = Object.assign({}, defaults, opts);
+    const options : Object = Object.assign({}, defaults, opts);
 
     return [
         provide(LOGGER, {
