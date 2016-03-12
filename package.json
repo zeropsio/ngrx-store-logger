@@ -1,0 +1,45 @@
+{
+  "name": "ngrx-store-logger",
+  "version": "0.0.1",
+  "description": "Advanced logging for @ngrx/store",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build_dist": "rm -rf dist && tsc",
+    "prepublish": "npm run typings && npm run build_dist",
+    "typings": "typings install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btroncone/ngrx-store-logger.git"
+  },
+  "keywords": [
+    "redux",
+    "ngrx",
+    "store",
+    "logger",
+    "rxjs"
+  ],
+  "author": "Brian Troncone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btroncone/ngrx-store-logger/issues"
+  },
+  "homepage": "https://github.com/btroncone/ngrx-store-logger#readme",
+  "peerDependencies": {
+    "rxjs": "^5.0.0-beta.2",
+    "angular2": "^2.0.0-beta.7",
+    "@ngrx/store": "^1.3.3"
+  },
+  "devDependencies": {
+    "angular2": "2.0.0-beta.7",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.13",
+    "reflect-metadata": "0.1.2",
+    "rimraf": "^2.5.1",
+    "tslint": "^3.4.0",
+    "typescript": "^1.7.3",
+    "typings": "^0.6.6",
+    "zone.js": "0.5.15"
+  },
+  "typings": "./dist/index.d.ts"
+}
