@@ -114,9 +114,12 @@ const postLogger = createMiddleware((log, loggerBuffer, options) => {
         .do(state => {
             if(state.type !== INIT_ACTION) {
                 let logInfo = log.getValue();
-                logInfo.took = timer.now() - logInfo.started;
-                logInfo.nextState = stateTransformer(state);
-                loggerBuffer([logInfo]);
+                //fixes issue caused by using with dev tools
+                if(logInfo) {
+                    logInfo.took = timer.now() - logInfo.started;
+                    logInfo.nextState = stateTransformer(state);
+                    loggerBuffer([logInfo]);
+                }
             }
         });
 }, [ LOGGER, LOGGER_BUFFER, LOGGER_OPTIONS ]);
