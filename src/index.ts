@@ -1,4 +1,4 @@
-import {OpaqueToken, provide, Provider} from "angular2/core";
+import {OpaqueToken, provide, Provider} from "@angular/core";
 import {BehaviorSubject} from "rxjs/Rx";
 import {
     createMiddleware,
