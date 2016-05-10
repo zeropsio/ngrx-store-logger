@@ -125,6 +125,16 @@ const postLogger = createMiddleware((log, loggerBuffer, options) => {
 }, [ LOGGER, LOGGER_BUFFER, LOGGER_OPTIONS ]);
 
 export const loggerMiddleware = (opts : Object = {}) => {
+    const ua = window.navigator.userAgent;
+    let ms_ie = false;
+               
+    const old_ie = ua.indexOf('MSIE ');
+    const new_ie = ua.indexOf('Trident/');
+
+    if ((old_ie > -1) || (new_ie > -1)) {
+        ms_ie = true;
+    }
+    
     const defaults = {
         level : `log`,
         collapsed : false,
@@ -132,7 +142,7 @@ export const loggerMiddleware = (opts : Object = {}) => {
         timestamp : true,
         stateTransformer : state => state,
         actionTransformer : actn => actn,
-        colors : {
+        colors : ms_ie ? {} : {
             title: () => `#000000`,
             prevState: () => `#9E9E9E`,
             action: () => `#03A9F4`,
