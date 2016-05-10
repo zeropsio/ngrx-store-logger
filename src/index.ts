@@ -1,10 +1,10 @@
 import {OpaqueToken, provide, Provider} from "@angular/core";
-import {BehaviorSubject} from "rxjs/Rx";
 import {
     createMiddleware,
     usePreMiddleware,
     usePostMiddleware
 } from '@ngrx/store';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 declare var console;
 
