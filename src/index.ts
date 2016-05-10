@@ -5,6 +5,7 @@ import {
     usePostMiddleware
 } from '@ngrx/store';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import 'rxjs/add/operator/do';
 
 declare var console;
 
