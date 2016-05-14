@@ -1,18 +1,6 @@
-import {OpaqueToken, provide, Provider} from "@angular/core";
-import {
-    createMiddleware,
-    usePreMiddleware,
-    usePostMiddleware
-} from '@ngrx/store';
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import 'rxjs/add/operator/do';
-
 declare var console;
 
 const logger = console;
-const LOGGER = new OpaqueToken('@ngrx/logger');
-const LOGGER_OPTIONS = new OpaqueToken('@ngrx/logger/options');
-const LOGGER_BUFFER = new OpaqueToken('@ngrx/logger/buffer');
 const INIT_ACTION = '@@ngrx/INIT';
 
 const repeat = (str, times) => (new Array(times + 1)).join(str);
@@ -95,47 +83,18 @@ const printBuffer = options => logBuffer => {
     logBuffer.length = 0;
 };
 
-const preLogger = createMiddleware((log, options) => {
-    return action$ => action$
-        .do(action => {
-            const {stateTransformer} = options;
-            let logEntry = {
-                started: timer.now(),
-                startedTime: new Date(),
-                prevState: stateTransformer(log.getValue()),
-                action
-            };
-            log.next(logEntry);
-        });
-}, [ LOGGER, LOGGER_OPTIONS ]);
-
-const postLogger = createMiddleware((log, loggerBuffer, options) => {
-    const {stateTransformer} = options;
-    return state$ => state$
-        .do(state => {
-            if(state.type !== INIT_ACTION) {
-                let logInfo = log.getValue();
-                //fixes issue caused by using with dev tools
-                if(logInfo) {
-                    logInfo.took = timer.now() - logInfo.started;
-                    logInfo.nextState = stateTransformer(state);
-                    loggerBuffer([logInfo]);
-                }
-            }
-        });
-}, [ LOGGER, LOGGER_BUFFER, LOGGER_OPTIONS ]);
-
-export const loggerMiddleware = (opts : Object = {}) => {
+export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
+    let log = {};
     const ua = window.navigator.userAgent;
     let ms_ie = false;
-               
+    //fix for action display in IE
     const old_ie = ua.indexOf('MSIE ');
     const new_ie = ua.indexOf('Trident/');
 
     if ((old_ie > -1) || (new_ie > -1)) {
         ms_ie = true;
     }
-    
+
     const defaults = {
         level : `log`,
         collapsed : false,
@@ -151,21 +110,31 @@ export const loggerMiddleware = (opts : Object = {}) => {
             error: () => `#F20404`,
         }
     };
-    const options : Object = Object.assign({}, defaults, opts);
 
-    return [
-        provide(LOGGER, {
-            useFactory(){
-                return new BehaviorSubject(null);
-            }
-        }),
-        provide(LOGGER_OPTIONS, {
-            useValue: options
-        }),
-        provide(LOGGER_BUFFER, {
-            useValue: printBuffer(options)
-        }),
-        usePreMiddleware(preLogger),
-        usePostMiddleware(postLogger)
-    ]
+    const options = Object.assign({}, defaults, opts);
+    const {stateTransformer} = options;
+    const buffer = printBuffer(options);
+
+    return function(state, action) {
+        let preLog = {
+            started: timer.now(),
+            startedTime: new Date(),
+            prevState: stateTransformer(log),
+            action
+        };
+
+        let nextState = reducer(state, action);
+
+        let postLog = {
+            took: timer.now() - preLog.started,
+            nextState: stateTransformer(nextState)
+        };
+        log = Object.assign({}, preLog, postLog);
+        //ignore init action fired by store and devtools
+        if(action.type !== INIT_ACTION) {
+            buffer([log]);
+        }
+
+        return nextState;
+    }
 };

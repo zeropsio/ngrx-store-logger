@@ -11,20 +11,25 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 npm install ngrx-store-logger --save
 ```
 
-1. Configure your ngrx store as normal using `provideStore`. 
-2. Using the provided `loggerMiddleware` function, specify option overrides.
+1. Import `compose` and `combineReducers` from @ngrx/store
+2. Invoke the `storeLogger` function from ngrx-store-logger, passing appropriate options. 
+3. Add `combineReducers` after `storeLogger` and invoke composed function with application reducers as an argument to `provideStore`.
 
 ```ts
-import {bootstrap} from 'angular2/platform/browser';
+import {bootstrap} from '@angular/platform-browser-dynamic';
 import {TodoApp} from './todo-app';
-import {provideStore} from "@ngrx/store";
-import {loggerMiddleware} from "ngrx-store-logger";
+import {provideStore, compose, combineReducers} from "@ngrx/store";
+import {storeLogger} from "ngrx-store-logger";
 
 export function main() {
   return bootstrap(TodoApp, [
-      provideStore({todos, visibilityFilter}),
-      //taking all defaults
-      ...loggerMiddleware()
+      //taking all logging defaults
+      provideStore(
+        compose(
+            storeLogger(), 
+            combineReducers
+        )({todos, visibilityFilter})
+      ),
   ])
   .catch(err => console.error(err));
 }
@@ -33,8 +38,9 @@ document.addEventListener('DOMContentLoaded', main);
 ```
 
 ## API
-### `loggerMiddleware(options : LoggerOptions  = {})`
-Initializes logger middleware with appropriate options (logical defaults if no options supplied)
+### `storeLogger(options : LoggerOptions  = {}) : Reducer`
+Initializes logger with appropriate options (logical defaults if no options supplied)
+*Returns a meta-reducer*
 
 #### Arguments
 * `options` \(*Object*): Available logger options
