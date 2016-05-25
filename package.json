@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@angular/core": "2.0.0-rc.1",
+    "@ngrx/core": "^1.0.0",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.13",
     "reflect-metadata": "0.1.2",
