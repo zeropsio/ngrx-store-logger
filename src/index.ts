@@ -22,7 +22,8 @@ const getLogLevel = (level, action, payload, type) => {
 const printBuffer = options => logBuffer => {
     const {actionTransformer, collapsed, colors, timestamp, duration, level} = options;
     logBuffer.forEach((logEntry, key) => {
-        const { started, startedTime, action, prevState, error } = logEntry;
+        const { started, startedTime, action, error } = logEntry;
+        const prevState = logEntry.prevState.nextState ? logEntry.prevState.nextState : '(Empty)';
         let { took, nextState } = logEntry;
         const nextEntry = logBuffer[key + 1];
         if (nextEntry) {
