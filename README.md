@@ -8,7 +8,7 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 
 ## Usage
 ```bash
-npm install ngrx-store-logger --save
+npm install ngrx-store-logger --save-dev
 ```
 
 1. Import `compose` and `combineReducers` from @ngrx/store
