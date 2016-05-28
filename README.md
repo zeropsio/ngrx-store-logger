@@ -8,12 +8,12 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 
 ## Usage
 ```bash
-npm install ngrx-store-logger --save-dev
+npm install ngrx-store-logger --save
 ```
 
-1. Import `combineReducers` from @ngrx/store
+1. Import `compose` and `combineReducers` from `@ngrx/store` and `@ngrx/core/compose`
 2. Invoke the `storeLogger` function from ngrx-store-logger, passing appropriate options. 
-3. Invoke the returned function with your applications combined reducers.
+3. Add `combineReducers` after `storeLogger` and invoke composed function with application reducers as an argument to `provideStore`.
 
 ```ts
 import {bootstrap} from '@angular/platform-browser-dynamic';
@@ -25,10 +25,12 @@ import {storeLogger} from "ngrx-store-logger";
 export function main() {
   return bootstrap(TodoApp, [
       //taking all logging defaults
-      compose(
-        storeLogger(), 
-        combineReducers
-      )({todos, visibilityFilter})
+      provideStore(
+        compose(
+            storeLogger(), 
+            combineReducers
+        )({todos, visibilityFilter})
+      ),
   ])
   .catch(err => console.error(err));
 }
