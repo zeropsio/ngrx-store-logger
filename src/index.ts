@@ -1,7 +1,7 @@
 declare var console;
 
 const logger = console;
-const INIT_ACTION = '@@ngrx/INIT';
+const INIT_ACTION = "@ngrx/store/init";
 
 const repeat = (str, times) => (new Array(times + 1)).join(str);
 const pad = (num, maxLength) => repeat(`0`, maxLength - num.toString().length) + num;
