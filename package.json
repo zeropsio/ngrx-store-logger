@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-logger",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
