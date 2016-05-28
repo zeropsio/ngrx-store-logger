@@ -19,14 +19,16 @@ npm install ngrx-store-logger --save-dev
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {TodoApp} from './todo-app';
 import {provideStore, combineReducers} from "@ngrx/store";
+import {compose} from "@ngrx/core/compose";
 import {storeLogger} from "ngrx-store-logger";
 
 export function main() {
   return bootstrap(TodoApp, [
       //taking all logging defaults
-      provideStore(
-        storeLogger()(combineReducers({todos, visibilityFilter}))
-      ),
+      compose(
+        storeLogger(), 
+        combineReducers
+      )({todos, visibilityFilter})
   ])
   .catch(err => console.error(err));
 }
