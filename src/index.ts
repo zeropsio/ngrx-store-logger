@@ -22,7 +22,8 @@ const getLogLevel = (level, action, payload, type) => {
 const printBuffer = options => logBuffer => {
     const {actionTransformer, collapsed, colors, timestamp, duration, level} = options;
     logBuffer.forEach((logEntry, key) => {
-        const { started, startedTime, action, prevState, error } = logEntry;
+        const { started, startedTime, action, error } = logEntry;
+        const prevState = logEntry.prevState.nextState ? logEntry.prevState.nextState : '(Empty)';
         let { took, nextState } = logEntry;
         const nextEntry = logBuffer[key + 1];
         if (nextEntry) {
@@ -98,7 +99,7 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
     const defaults = {
         level : `log`,
         collapsed : false,
-        duration : false,
+        duration : true,
         timestamp : true,
         stateTransformer : state => state,
         actionTransformer : actn => actn,
