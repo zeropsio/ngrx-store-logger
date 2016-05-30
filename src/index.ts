@@ -99,7 +99,7 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
     const defaults = {
         level : `log`,
         collapsed : false,
-        duration : false,
+        duration : true,
         timestamp : true,
         stateTransformer : state => state,
         actionTransformer : actn => actn,
