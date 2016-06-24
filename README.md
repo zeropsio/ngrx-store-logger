@@ -52,7 +52,7 @@ Initializes logger with appropriate options (logical defaults if no options supp
 interface LoggerOptions {
     level? : 'log' | 'console' | 'warn' | 'error' | 'info'; //default log
     collapsed? : boolean; //Should log group be collapsed? default: false
-    duration? : boolean; //Print duration with action? default: false
+    duration? : boolean; //Print duration with action? default: true
     timestamp? : boolean; //Print timestamp with action? default: true
     stateTransformer? : (state : Object) => Object; //Transform state before print default: state => state
     actionTransformer? : (actn : Object) => Object; //Transform action before print default: actn => actn
