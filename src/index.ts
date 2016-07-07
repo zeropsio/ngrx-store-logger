@@ -86,7 +86,7 @@ const printBuffer = options => logBuffer => {
 
 export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
     let log = {};
-    const ua = window && window.navigator.userAgent ? window.navigator.userAgent : '';
+    const ua = typeof window !== 'undefined' && window.navigator.userAgent ? window.navigator.userAgent : '';
     let ms_ie = false;
     //fix for action display in IE
     const old_ie = ua.indexOf('MSIE ');
