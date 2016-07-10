@@ -21,10 +21,12 @@ import {TodoApp} from './todo-app';
 import {provideStore, combineReducers} from "@ngrx/store";
 import {compose} from "@ngrx/core/compose";
 import {storeLogger} from "ngrx-store-logger";
+import {todos, visibilityFilter} from './reducers';
 
 export function main() {
   return bootstrap(TodoApp, [
       //taking all logging defaults
+      //todos and visibilityFilter are just sample reducers
       provideStore(
         compose(
             storeLogger(), 
