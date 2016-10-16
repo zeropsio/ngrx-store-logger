@@ -104,7 +104,7 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
         stateTransformer : state => state,
         actionTransformer : actn => actn,
         colors : ms_ie ? {} : {
-            title: () => `#000000`,
+            title: null,
             prevState: () => `#9E9E9E`,
             action: () => `#03A9F4`,
             nextState: () => `#4CAF50`,
