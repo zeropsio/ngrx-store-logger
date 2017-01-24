@@ -56,6 +56,10 @@ interface LoggerOptions {
     collapsed? : boolean; //Should log group be collapsed? default: false
     duration? : boolean; //Print duration with action? default: true
     timestamp? : boolean; //Print timestamp with action? default: true
+    filter?: {
+      whitelist?: string[], // Only print actions included in this list - has priority over blacklist
+      blacklist?: string[] // Only print actions that are NOT included in this list
+    }
     stateTransformer? : (state : Object) => Object; //Transform state before print default: state => state
     actionTransformer? : (actn : Object) => Object; //Transform action before print default: actn => actn
     colors? : {
@@ -67,3 +71,32 @@ interface LoggerOptions {
     }
 }
 ```
+
+### Filtering
+#### Whitelist
+Only actions included in the list will be printed
+Example:
+``` ts
+const options: LoggerOptions = {
+  filter: {
+    whitelist: ['set-value']
+  }
+}
+storeLogger(options) : Reducer
+```
+With this setup, only action *set-value* will be logged
+
+#### Blacklist
+Action included in the blacklist will not be printed
+Example:
+``` ts
+const options: LoggerOptions = {
+  filter: {
+    blacklist: ['set-value']
+  }
+}
+storeLogger(options) : Reducer
+```
+With this setup, all actions except *set-value* will be printed
+
+*Note*: Whitelist has predence over blacklist. If both are defined, only whitelist will be considered
