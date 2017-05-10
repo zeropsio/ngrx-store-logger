@@ -94,7 +94,7 @@ const isAllowed = (action, filter) => {
     return filter.blacklist && filter.blacklist.indexOf(action.type) === -1;
 };
 
-export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
+export const storeLogger = (opts: LoggerOptions = {}) => (reducer: Function) => {
     let log = {};
     const ua = typeof window !== 'undefined' && window.navigator.userAgent ? window.navigator.userAgent : '';
     let ms_ie = false;
@@ -176,13 +176,4 @@ export interface LoggerColorsOption {
     action: (action: Object) => string;
     nextState: (nextState: Object) => string;
     error: (error: any, prevState: Object) => string;
-}
-
-const options: LoggerOptions = {
-    filter: {
-        blacklist: ['']
-    },
-    colors: {
-        action: (action: Object) => ''
-    }
 }
