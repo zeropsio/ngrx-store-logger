@@ -153,3 +153,36 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
         return nextState;
     }
 };
+
+export interface LoggerOptions {
+    level?: any;
+    collapsed?: boolean;
+    duration?: boolean; //Print duration with action? default: true
+    timestamp?: boolean; //Print timestamp with action? default: true
+    filter?: LoggerFilterOption;
+    stateTransformer?: (state: Object) => Object; //Transform state before print default: state => state
+    actionTransformer?: (actn: Object) => Object; //Transform action before print default: actn => actn
+    colors?: LoggerColorsOption;
+};
+
+export interface LoggerFilterOption {
+    whitelist?: string[];
+    blacklist?: string[];
+}
+
+export interface LoggerColorsOption {
+    title: (action: Object) => string;
+    prevState: (prevState: Object) => string;
+    action: (action: Object) => string;
+    nextState: (nextState: Object) => string;
+    error: (error: any, prevState: Object) => string;
+}
+
+const options: LoggerOptions = {
+    filter: {
+        blacklist: ['']
+    },
+    colors: {
+        action: (action: Object) => ''
+    }
+}
