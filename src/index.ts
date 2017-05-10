@@ -155,18 +155,42 @@ export const storeLogger = (opts: LoggerOptions = {}) => (reducer: Function) => 
 };
 
 export interface LoggerOptions {
+    /**
+     * 'log' | 'console' | 'warn' | 'error' | 'info'. Default: 'log'
+     */
     level?: any;
+    /**
+     * Should log group be collapsed? default: false
+     */
     collapsed?: boolean;
-    duration?: boolean; //Print duration with action? default: true
-    timestamp?: boolean; //Print timestamp with action? default: true
+    /**
+     * Print duration with action? default: true
+     */
+    duration?: boolean;
+    /**
+     * Print timestamp with action? default: true
+     */
+    timestamp?: boolean;
     filter?: LoggerFilterOption;
-    stateTransformer?: (state: Object) => Object; //Transform state before print default: state => state
-    actionTransformer?: (actn: Object) => Object; //Transform action before print default: actn => actn
+    /**
+     * Transform state before print default: state => state
+     */
+    stateTransformer?: (state: Object) => Object;
+    /**
+     * Transform action before print default: actn => actn
+     */
+    actionTransformer?: (actn: Object) => Object;
     colors?: LoggerColorsOption;
 };
 
 export interface LoggerFilterOption {
+    /**
+     * Only print actions included in this list - has priority over blacklist
+     */
     whitelist?: string[];
+    /**
+     * Only print actions that are NOT included in this list
+     */
     blacklist?: string[];
 }
 
