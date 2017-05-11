@@ -106,24 +106,38 @@ export const storeLogger = (opts: LoggerOptions = {}) => (reducer: Function) => 
         ms_ie = true;
     }
 
-    const defaults = {
-        level : `log`,
-        collapsed : false,
-        duration : true,
-        timestamp : true,
-        stateTransformer : state => state,
-        actionTransformer : actn => actn,
-        filter : {
-            whitelist : [],
-            blacklist : []
-        },
-        colors : ms_ie ? {} : {
+    let colors: LoggerColorsOption;
+    if (ms_ie) {
+        // Setting colors functions to null when it's an IE browser.
+        colors = {
             title: null,
-            prevState: () => `#9E9E9E`,
-            action: () => `#03A9F4`,
-            nextState: () => `#4CAF50`,
-            error: () => `#F20404`,
+            prevState: null,
+            action: null,
+            nextState: null,
+            error: null,
         }
+    } else {
+        colors = {
+            title: null,
+            prevState: () => '#9E9E9E',
+            action: () => '#03A9F4',
+            nextState: () => '#4CAF50',
+            error: () => '#F20404',
+        }
+    }
+
+    const defaults: LoggerOptions = {
+        level: 'log',
+        collapsed: false,
+        duration: true,
+        timestamp: true,
+        stateTransformer: state => state,
+        actionTransformer: actn => actn,
+        filter: {
+            whitelist: [],
+            blacklist: []
+        },
+        colors: colors
     };
 
     const options = Object.assign({}, defaults, opts);
