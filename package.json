@@ -5,8 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build_dist": "rm -rf dist && tsc",
-    "prepublish": "npm run typings && npm run build_dist",
-    "typings": "typings install"
+    "prepublish": "npm run build_dist"
   },
   "repository": {
     "type": "git",
@@ -27,20 +26,20 @@
   },
   "homepage": "https://github.com/btroncone/ngrx-store-logger#readme",
   "peerDependencies": {
-    "rxjs": "^5.0.0-beta.6",
-    "@ngrx/store": "^2.0.1"
+    "@ngrx/store": "^2.2.1"
   },
   "devDependencies": {
-    "@ngrx/core": "^1.0.1",
+    "@angular/core": "^2.4.7",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.1",
     "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.13",
-    "reflect-metadata": "0.1.2",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.10",
     "rimraf": "^2.5.1",
     "tslint": "^3.4.0",
-    "typescript": "^1.7.3",
-    "typings": "^0.6.6",
-    "@ngrx/store": "^2.0.1",
-    "rxjs": "^5.0.0-beta.6"
+    "typescript": "^2.1.4",
+    "rxjs": "^5.4.0",
+    "zone.js": "^0.7.7"
   },
   "typings": "./dist/index.d.ts"
 }
