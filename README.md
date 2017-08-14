@@ -13,7 +13,7 @@ npm install ngrx-store-logger --save
 **UPDATED FOR NGRX 4**
 1. Import `ngrx-store-logger`
 2. Wrap in a function 
-3. Include in your meta-reducers in `Store.forRoot` call.
+3. Include in your meta-reducers in `StoreModule.forRoot` call.
 
 ```ts
 import { NgModule } from '@angular/core';
