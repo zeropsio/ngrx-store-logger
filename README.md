@@ -4,40 +4,41 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 ![ngrx-store-logger](http://imgur.com/Fm2qfb5.png)
 
 ## Dependencies
-`ngrx-store-logger` depends on [@ngrx/store](https://github.com/ngrx/store) and [Angular 2](https://github.com/angular/angular).
+`ngrx-store-logger` depends on [@ngrx/store](https://github.com/ngrx/store) and [Angular 2+](https://github.com/angular/angular).
 
 ## Usage
 ```bash
 npm install ngrx-store-logger --save
 ```
-
-1. Import `compose` and `combineReducers` from `@ngrx/store` and `@ngrx/core/compose`
-2. Invoke the `storeLogger` function from ngrx-store-logger, passing appropriate options. 
-3. Add `combineReducers` after `storeLogger` and invoke composed function with application reducers as an argument to `provideStore`.
+**UPDATED FOR NGRX 4**
+1. Import `ngrx-store-logger`
+2. Wrap in a function 
+3. Include in your meta-reducers in `Store.forRoot` call.
 
 ```ts
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {TodoApp} from './todo-app';
-import {provideStore, combineReducers} from "@ngrx/store";
-import {compose} from "@ngrx/core/compose";
-import {storeLogger} from "ngrx-store-logger";
-import {todos, visibilityFilter} from './reducers';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule, ActionReducer } from '@ngrx/store';
+import { storeLogger } from 'ngrx-store-logger';
+import { reducers } from './reducers';
 
-export function main() {
-  return bootstrap(TodoApp, [
-      //taking all logging defaults
-      //todos and visibilityFilter are just sample reducers
-      provideStore(
-        compose(
-            storeLogger(), 
-            combineReducers
-        )({todos, visibilityFilter})
-      ),
-  ])
-  .catch(err => console.error(err));
+export function logger(reducer: ActionReducer<State>): any {
+  // default, no options
+  return storeLogger()(reducer);
 }
 
-document.addEventListener('DOMContentLoaded', main);
+export const metaReducers = environment.production ? [] : [logger];
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot(
+        reducers,
+        {metaReducers}
+    )
+  ]
+})
+export class MyAppModule {}
 ```
 
 ## API
