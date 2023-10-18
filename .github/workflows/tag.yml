@@ -1,0 +1,23 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          npm ci
+          npm i -g replace-in-files-cli
+          replace-in-files --string='0.0.0' --replacement='${{ github.event.release.tag_name }}' package.json
+          npm run build:prepare-publish
+          npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
