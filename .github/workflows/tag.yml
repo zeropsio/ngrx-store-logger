@@ -15,9 +15,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: |
           npm ci
-          npm i -g replace-in-files-cli
-          replace-in-files --string='0.0.0' --replacement='${{ github.event.release.tag_name }}' package.json
-          npm run build:prepare-publish
+          npm run prepublish
           npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
