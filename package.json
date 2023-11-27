@@ -1,6 +1,6 @@
 {
   "name": "@zerops/ngrx-store-logger",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
@@ -26,16 +26,16 @@
   },
   "homepage": "https://github.com/btroncone/ngrx-store-logger#readme",
   "peerDependencies": {
-    "@ngrx/store": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
+    "@ngrx/store": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@angular/core": "16.2.10",
-    "@ngrx/store": "16.3.0",
+    "@angular/core": "17.0.4",
+    "@ngrx/store": "17.0.0",
     "rimraf": "5.0.5",
-    "eslint": "8.51.0",
-    "typescript": "5.1.6",
+    "eslint": "8.54.0",
+    "typescript": "5.2.2",
     "rxjs": "7.8.1",
-    "zone.js": "0.13.3"
+    "zone.js": "0.14.2"
   },
   "typings": "./dist/index.d.ts"
 }
