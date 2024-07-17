@@ -1,4 +1,4 @@
-# ngrx-store-logger
+# @zerops/ngrx-store-logger
 Advanced logging for @ngrx/store applications, ported from [redux-logger](https://github.com/fcomb/redux-logger). Forked from [ngrx-store-logger](https://github.com/btroncone/ngrx-store-logger), updated to Angular 18+.
 
 ![ngrx-store-logger](http://imgur.com/Fm2qfb5.png)
