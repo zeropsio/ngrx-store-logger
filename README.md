@@ -4,14 +4,14 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 ![ngrx-store-logger](http://imgur.com/Fm2qfb5.png)
 
 ## Dependencies
-`ngrx-store-logger` depends on [@ngrx/store](https://github.com/ngrx/store) and [Angular 2+](https://github.com/angular/angular).
+`@zeropsio/ngrx-store-logger` depends on [@ngrx/store](https://github.com/ngrx/store) and [Angular 2+](https://github.com/angular/angular).
 
 ## Usage
 ```bash
-npm install ngrx-store-logger --save
+npm install @zeropsio/ngrx-store-logger --save
 ```
 **UPDATED FOR NGRX 4**
-1. Import `ngrx-store-logger`
+1. Import `@zeropsio/ngrx-store-logger`
 2. Wrap in an exported function
 3. Include in your meta-reducers in `StoreModule.forRoot` call.
 
