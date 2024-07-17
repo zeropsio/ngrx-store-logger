@@ -1,5 +1,5 @@
 # ngrx-store-logger
-Advanced logging for @ngrx/store applications, ported from [redux-logger](https://github.com/fcomb/redux-logger).
+Advanced logging for @ngrx/store applications, ported from [redux-logger](https://github.com/fcomb/redux-logger). Forked from [ngrx-store-logger](https://github.com/btroncone/ngrx-store-logger), updated to Angular 18+.
 
 ![ngrx-store-logger](http://imgur.com/Fm2qfb5.png)
 
@@ -11,7 +11,7 @@ Advanced logging for @ngrx/store applications, ported from [redux-logger](https:
 npm install @zerops/ngrx-store-logger --save
 ```
 **UPDATED FOR NGRX 4**
-1. Import `@zeropsio/ngrx-store-logger`
+1. Import `@zerops/ngrx-store-logger`
 2. Wrap in an exported function
 3. Include in your meta-reducers in `StoreModule.forRoot` call.
 
